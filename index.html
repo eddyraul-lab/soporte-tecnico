@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kit de Soporte Técnico | Ing. Eddy Raul Cuadros Palma</title>
+    <script>
+        function verificarAcceso() {
+            let password = prompt("Por favor, ingrese la contraseña de acceso:");
+            let passwordCorrecta = "$RedIca2026$"; 
+
+            if (password !== passwordCorrecta) {
+                alert("Contraseña incorrecta. Acceso denegado.");
+                document.body.innerHTML = "<h2 style='color:red; text-align:center; margin-top:20vh;'>Acceso Restringido. Vuelve a cargar la página e intenta de nuevo.</h2>";
+            }
+        }
+    </script>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, sans-serif; 
@@ -55,7 +66,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="verificarAcceso()">
     <div class="container">
         <h1>Centro de Soporte Técnico</h1>
         <p>Herramientas y Automatización Portables</p>
