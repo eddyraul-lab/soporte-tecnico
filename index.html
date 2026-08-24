@@ -4,17 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kit de Soporte Técnico | Ing. Eddy Raul Cuadros Palma</title>
-    <script>
-        function verificarAcceso() {
-            let password = prompt("Por favor, ingrese la contraseña de acceso:");
-            let passwordCorrecta = "$RedIca2026$"; 
-
-            if (password !== passwordCorrecta) {
-                alert("Contraseña incorrecta. Acceso denegado.");
-                document.body.innerHTML = "<h2 style='color:red; text-align:center; margin-top:20vh;'>Acceso Restringido. Vuelve a cargar la página e intenta de nuevo.</h2>";
-            }
-        }
-    </script>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, sans-serif; 
@@ -37,6 +26,35 @@
             border-bottom: 1px solid #444; 
             padding-bottom: 10px; 
             margin-top: 30px; 
+        }
+        /* Estilos para la pantalla de bloqueo */
+        #login-screen {
+            margin-top: 50px;
+        }
+        #login-screen input {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background: #1a1a1a;
+            color: white;
+            width: 70%;
+            margin-right: 10px;
+            text-align: center;
+        }
+        #login-screen button {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #login-screen button:hover {
+            background: #008ba3;
         }
         .btn { 
             display: block; 
@@ -64,38 +82,65 @@
             color: #777; 
             font-size: 0.9em; 
         }
+        /* Ocultar el contenido principal por defecto */
+        .content-protected { display: none; }
     </style>
+    <script>
+        function validarPassword() {
+            let passIngresada = document.getElementById("inputPass").value;
+            let passCorrecta = "$RedIca2026$";
+
+            if (passIngresada === passCorrecta) {
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                alert("Contraseña incorrecta.");
+                document.getElementById("inputPass").value = "";
+            }
+        }
+    </script>
 </head>
-<body onload="verificarAcceso()">
+<body>
     <div class="container">
-        <h1>Centro de Soporte Técnico</h1>
-        <p>Herramientas y Automatización Portables</p>
-        
-        <!-- Menú Maestro -->
-        <a href="https://drive.google.com/uc?export=download&id=1p6IpzcUm02ZJIEAl-v-qgyz5b5pwksI4" class="btn">📥 Descargar Menú Maestro (.bat)</a>
+        <!-- Pantalla de Login con asteriscos -->
+        <div id="login-screen">
+            <h2>🔒 Acceso Restringido</h2>
+            <p>Ingrese su contraseña para ver las herramientas:</p>
+            <input type="password" id="inputPass" placeholder="Contraseña..." onkeypress="if(event.key === 'Enter') validarPassword()">
+            <button onclick="validarPassword()">Entrar</button>
+        </div>
 
-        <!-- Sección Office -->
-        <h3>Microsoft Office (Instaladores Comprimidos)</h3>
-        <a href="https://drive.google.com/uc?export=download&id=1c4ZR9Um9VKgvGWnRumCz4c4M3sPFwMLp" class="btn btn-office">📊 Descargar Office 2024 LTSC</a>
-        <a href="https://drive.google.com/uc?export=download&id=1YxPXHv-ebLMU3_hQYKSLtgk_jLqBme87" class="btn btn-office">📊 Descargar Office 2021 Pro Plus</a>
-        <a href="https://drive.google.com/uc?export=download&id=1iMmZJvRMTG_698F-El5r2Ad3Il376DPH" class="btn btn-office">📊 Descargar Office 2019 Pro Plus</a>
-        <a href="https://drive.google.com/uc?export=download&id=1JUFOf_7uyl9J3dTKldNGfTdWeed9QkQJ" class="btn btn-office">🧹 Descargar Desinstalador Office (.bat)</a>
+        <!-- Contenido Protegido (Oculto hasta poner la clave correcta) -->
+        <div id="main-content" class="content-protected">
+            <h1>Centro de Soporte Técnico</h1>
+            <p>Herramientas y Automatización Portables</p>
+            
+            <!-- Menú Maestro -->
+            <a href="https://drive.google.com/uc?export=download&id=1p6IpzcUm02ZJIEAl-v-qgyz5b5pwksI4" class="btn">📥 Descargar Menú Maestro (.bat)</a>
 
-        <!-- Sección Seguridad y Redes -->
-        <h3>Seguridad y Conectividad</h3>
-        <a href="https://drive.google.com/uc?export=download&id=1zsJ4zzq9i8c26Pr2uEgruosD9lMcCDvW" class="btn btn-security">🛡️ Descargar NOD32 Antivirus</a>
-        <a href="https://drive.google.com/uc?export=download&id=107c5jKVZgr76hR3dHcf3l3KMw4zHH87X" class="btn btn-security">🌐 Descargar Urban VPN</a>
+            <!-- Sección Office -->
+            <h3>Microsoft Office (Instaladores Comprimidos)</h3>
+            <a href="https://drive.google.com/uc?export=download&id=1c4ZR9Um9VKgvGWnRumCz4c4M3sPFwMLp" class="btn btn-office">📊 Descargar Office 2024 LTSC</a>
+            <a href="https://drive.google.com/uc?export=download&id=1YxPXHv-ebLMU3_hQYKSLtgk_jLqBme87" class="btn btn-office">📊 Descargar Office 2021 Pro Plus</a>
+            <a href="https://drive.google.com/uc?export=download&id=1iMmZJvRMTG_698F-El5r2Ad3Il376DPH" class="btn btn-office">📊 Descargar Office 2019 Pro Plus</a>
+            <a href="https://drive.google.com/uc?export=download&id=1JUFOf_7uyl9J3dTKldNGfTdWeed9QkQJ" class="btn btn-office">🧹 Descargar Desinstalador Office (.bat)</a>
 
-        <!-- Sección Utilidades Portables -->
-        <h3>Utilidades Portables</h3>
-        <a href="https://drive.google.com/uc?export=download&id=1MbmfNcauFSxpqosfbqLpv9KJRjynN6hB" class="btn btn-portable">🛠️ Descargar Snappy Driver</a>
-        <a href="https://drive.google.com/uc?export=download&id=1ZRGCdChFIRgUrUfQUwcEYapdbk5asLCz" class="btn btn-portable">🛠️ Descargar Recuva</a>
-        <a href="https://drive.google.com/uc?export=download&id=1WkEV6CYSgEO44QcMymoqL6OG6kTnfKx4" class="btn btn-portable">🛠️ Descargar AdwCleaner</a>
-        <a href="https://drive.google.com/uc?export=download&id=1ZxCXdirhBBXOAx230Rup7jD4WNVeEueA" class="btn btn-portable">🛠️ Descargar CPU-Z</a>
-        <a href="https://drive.google.com/uc?export=download&id=1wH17j0_ebw6mOp5VZDj2_p0qYNJdtmh4" class="btn btn-portable">🛠️ Descargar CrystalDiskInfo</a>
-        <a href="https://drive.google.com/drive/folders/1pxZWZMtGULYx5Ub-9YxARWPG4x8DzJA7" target="_blank" class="btn btn-portable">📂 Carpeta TestDisk</a>
-        
-        <div class="footer">Desarrollado por Ing. Eddy Raul Cuadros Palma</div>
+            <!-- Sección Seguridad y Redes -->
+            <h3>Seguridad y Conectividad</h3>
+            <a href="https://drive.google.com/uc?export=download&id=1zsJ4zzq9i8c26Pr2uEgruosD9lMcCDvW" class="btn btn-security">🛡️ Descargar NOD32 Antivirus</a>
+            <a href="https://drive.google.com/uc?export=download&id=107c5jKVZgr76hR3dHcf3l3KMw4zHH87X" class="btn btn-security">🌐 Descargar Urban VPN</a>
+
+            <!-- Sección Utilidades Portables -->
+            <h3>Utilidades Portables</h3>
+            <a href="https://drive.google.com/uc?export=download&id=1MbmfNcauFSxpqosfbqLpv9KJRjynN6hB" class="btn btn-portable">🛠️ Descargar Snappy Driver</a>
+            <a href="https://drive.google.com/uc?export=download&id=1ZRGCdChFIRgUrUfQUwcEYapdbk5asLCz" class="btn btn-portable">🛠️ Descargar Recuva</a>
+            <a href="https://drive.google.com/uc?export=download&id=1WkEV6CYSgEO44QcMymoqL6OG6kTnfKx4" class="btn btn-portable">🛠️ Descargar AdwCleaner</a>
+            <a href="https://drive.google.com/uc?export=download&id=1ZxCXdirhBBXOAx230Rup7jD4WNVeEueA" class="btn btn-portable">🛠️ Descargar CPU-Z</a>
+            <a href="https://drive.google.com/uc?export=download&id=1wH17j0_ebw6mOp5VZDj2_p0qYNJdtmh4" class="btn btn-portable">🛠️ Descargar CrystalDiskInfo</a>
+            <a href="https://drive.google.com/drive/folders/1pxZWZMtGULYx5Ub-9YxARWPG4x8DzJA7" target="_blank" class="btn btn-portable">📂 Carpeta TestDisk</a>
+            
+            <div class="footer">Desarrollado por Ing. Eddy Raul Cuadros Palma</div>
+        </div>
     </div>
 </body>
 </html>
